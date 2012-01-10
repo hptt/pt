@@ -414,7 +414,7 @@ class PT::UI
     if config.empty?
       message "I can't find info about your Pivotal Tracker account in #{GLOBAL_CONFIG_PATH}"
       while !config[:api_number] do
-        config[:email] = ask "What is your email?"
+        config[:email] = ask("What is your email?").to_s
         password = ask_secret "And your password? (won't be displayed on screen)"
         begin
           config[:api_number] = PT::Client.get_api_token(config[:email], password)
