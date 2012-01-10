@@ -7,14 +7,15 @@ class PT::UI
   LOCAL_CONFIG_PATH = ((ENV['BUNDLE_GEMFILE'] && File.dirname(ENV['BUNDLE_GEMFILE'])) || Dir.pwd) + '/.pt'
 
   def initialize(args)
+    @args = args
     require 'pt/debugger' if ARGV.delete('--debug')
     @io = HighLine.new
     @global_config = load_global_config
     @client = PT::Client.new(@global_config[:api_number])
     @local_config = load_local_config
     @project = @client.get_project(@local_config[:project_id])
-    command = args[0].to_sym rescue :my_work
-    @params = args[1..-1]
+    command = @args[0].to_sym rescue :my_work
+    @params = @args[1..-1]
     commands.include?(command.to_sym) ? send(command.to_sym) : help
   end
 
@@ -383,8 +384,8 @@ class PT::UI
 
   
   def help 
-    if ARGV[0]
-      message("Command #{ARGV[0]} not recognized. Showing help.")
+    if @args[0]
+      message("Command #{@args[0]} not recognized. Showing help.")
     end
     
     title("Command line usage")
