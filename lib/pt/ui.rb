@@ -351,6 +351,14 @@ class PT::UI
     end
   end
 
+  def finished
+    tasks = @client.get_all_tasks_to_deliver(@project)
+    tasks.each do | task |
+      title("--- [#{(tasks.index task) + 1 }] -----------------")
+      show_task(task)
+    end
+  end
+
   def find
     tasks = @client.get_my_work(@project, @local_config[:user_name])
     if @params[0]

@@ -62,6 +62,10 @@ class PT::Client
     project.stories.all(:owner => user_name, :current_state => 'finished')
   end
 
+  def get_all_tasks_to_deliver(project)
+    project.stories.all(:current_state => 'finished')
+  end
+
   def get_my_tasks_to_accept(project, user_name)
     project.stories.all(:owner => user_name, :current_state => 'delivered')
   end
