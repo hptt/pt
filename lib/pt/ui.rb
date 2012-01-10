@@ -3,10 +3,10 @@ require 'colored'
 require 'highline'
 
 class PT::UI
+  GLOBAL_CONFIG_PATH = ENV['HOME'] + "/.pt"
+  LOCAL_CONFIG_PATH = (File.dirname(ENV['BUNDLE_GEMFILE']) || Dir.pwd) + '/.pt'
 
   def initialize(args)
-    GLOBAL_CONFIG_PATH = ENV['HOME'] + "/.pt"
-    LOCAL_CONFIG_PATH = Dir.pwd + '/.pt'
     require 'pt/debugger' if ARGV.delete('--debug')
     @io = HighLine.new
     @global_config = load_global_config
