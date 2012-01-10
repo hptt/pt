@@ -5,6 +5,7 @@ require 'highline'
 class PT::UI
 
   GLOBAL_CONFIG_PATH = ENV['HOME'] + "/.pt"
+  puts Dir.pwd
   LOCAL_CONFIG_PATH = Dir.pwd + '/.pt'
 
   def initialize(args)
