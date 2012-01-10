@@ -4,7 +4,7 @@ require 'highline'
 
 class PT::UI
   GLOBAL_CONFIG_PATH = ENV['HOME'] + "/.pt"
-  LOCAL_CONFIG_PATH = (File.dirname(ENV['BUNDLE_GEMFILE']) || Dir.pwd) + '/.pt'
+  LOCAL_CONFIG_PATH = ((ENV['BUNDLE_GEMFILE'] && File.dirname(ENV['BUNDLE_GEMFILE'])) || Dir.pwd) + '/.pt'
 
   def initialize(args)
     require 'pt/debugger' if ARGV.delete('--debug')
